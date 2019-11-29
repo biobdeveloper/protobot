@@ -1,0 +1,4 @@
+aiogram
+sqlalchemy
+aioredis
+aiohttp_socks
