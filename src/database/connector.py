@@ -1,5 +1,5 @@
 from src.utils import logger_create
-from src.database.orm import Session, TelegramUser
+from src.database.orm import Session, TelegramUser, BackendData
 
 
 class Connector:
@@ -21,3 +21,17 @@ class Connector:
             self.session.commit()
         except:
             pass
+
+    def add_new_backend_data(self, user, data):
+        try:
+            _user = TelegramUser(id=user.id)
+            _new_data = BackendData(telegram_id=_user.id, data=data)
+            self.session.add(_new_data)
+            self.session.commit()
+        except:
+            pass
+
+    def get_backend_data(self, user):
+        data = self.session.query(BackendData.data) \
+            .filter(BackendData.telegram_id == user.id).all()
+        return data
