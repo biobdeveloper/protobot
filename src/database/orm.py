@@ -40,5 +40,16 @@ class BackendData(Base):
     data = Column(String)
 
 
+class Admin(Base):
+    __tablename__ = "admins"
+
+    id = Column(Integer, primary_key=True)
+    telegram_id = Column(Integer, ForeignKey(TelegramUser.id), unique=True)
+    telegram_user = relation('TelegramUser', remote_side=TelegramUser.id)
+    is_root = Column(Boolean, default=False)
+
+    # TODO add permissions system for admins
+
+
 if __name__ == '__main__':
     create_all()
