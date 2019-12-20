@@ -8,10 +8,11 @@ from sqlalchemy import Column, DateTime, Integer, String, Boolean, ForeignKey
 from sqlalchemy.orm import sessionmaker, relation, relationship
 from sqlalchemy.ext.declarative import declarative_base
 
-from config.system import DATABASE_NAME, project_root_dir
+from config.system import CONN_URL
 
 
-engine = create_engine(f"sqlite:///{str(project_root_dir)}/{DATABASE_NAME}", echo=False)
+engine = create_engine(CONN_URL, echo=False)
+
 Base = declarative_base()
 Session = sessionmaker(bind=engine)
 
