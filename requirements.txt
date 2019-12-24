@@ -1,5 +1,5 @@
 aiogram
 sqlalchemy
 aioredis
-aiohttp_socks
+aiohttp_socks==0.2.2
 psycopg2
