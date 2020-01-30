@@ -2,7 +2,7 @@ from aiogram import types
 
 from src.app import bot, dp
 from src.text_content import TextMessage
-from src.backend.backend import *
+from src.backend.__init__ import *
 from src.telegram.states import UserState
 from src.telegram.keyboards import keyboards
 
