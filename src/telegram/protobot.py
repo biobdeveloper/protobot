@@ -21,22 +21,24 @@ class ProtoBot(Bot):
             chat_id = self.root_id
         if not parse_mode:
             parse_mode = self.parse_mode
-
-        if len(text) > 4096:
-            await self.send_message(text=text[0:4096],
-                                    chat_id=chat_id,
-                                    reply_markup=reply_markup,
-                                    parse_mode=parse_mode)
-            text = text[4096:]
-            await self.s_send_message(text=text,
-                                      chat_id=chat_id,
-                                      reply_markup=reply_markup,
-                                      parse_mode=parse_mode)
-        else:
-            await self.send_message(text=text,
-                                    chat_id=chat_id,
-                                    reply_markup=reply_markup,
-                                    parse_mode=parse_mode)
+        try:
+            if len(text) > 4096:
+                await self.send_message(text=text[0:4096],
+                                        chat_id=chat_id,
+                                        reply_markup=reply_markup,
+                                        parse_mode=parse_mode)
+                text = text[4096:]
+                await self.s_send_message(text=text,
+                                          chat_id=chat_id,
+                                          reply_markup=reply_markup,
+                                          parse_mode=parse_mode)
+            else:
+                await self.send_message(text=text,
+                                        chat_id=chat_id,
+                                        reply_markup=reply_markup,
+                                        parse_mode=parse_mode)
+        except BotBlocked:
+            pass
 
     async def s_edit_message_text(self, message_id, text, chat_id=None, reply_markup=None):
         """Ignore errors with message editing"""
@@ -49,6 +51,12 @@ class ProtoBot(Bot):
                                          reply_markup=reply_markup)
         except MessageCantBeEdited:
             pass
+        except MessageNotModified:
+            pass
+        except BotBlocked:
+            pass
+
+
 
     async def s_delete_message(self, message_id, chat_id=None):
         """Ignore errors with message deleting"""
@@ -60,4 +68,6 @@ class ProtoBot(Bot):
         except MessageToDeleteNotFound:
             pass
         except MessageCantBeDeleted:
+            pass
+        except BotBlocked:
             pass
