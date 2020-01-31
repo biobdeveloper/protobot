@@ -13,7 +13,6 @@ async def start(message: types.Message, state: FSMContext):
     _current_user_state = await state.get_state()
     await register(message.from_user) if message.text == '/start' and not _current_user_state else None
     await bot.s_send_message(TextMessage.start, reply_markup=keyboards['start'])
-    await register(message.from_user)
     await UserState.start.set()
 
 
@@ -28,4 +27,3 @@ async def add_new_user_data(message: types.Message):
 async def get_user_data(message: types.Message):
     data = await get_backend_data(message.from_user)
     await bot.s_send_message(TextMessage.get_user_data.format(data))
-

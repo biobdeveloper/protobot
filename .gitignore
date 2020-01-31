@@ -3,7 +3,7 @@
 __pycache__/
 *logs/
 *.log
-*.db
 venv/
 *.sql
+*.sqlite
 config/system.py

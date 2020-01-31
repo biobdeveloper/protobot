@@ -15,7 +15,7 @@ PG_HOST = "127.0.0.1"
 PG_PORT = 5432
 
 _CONN_URLS = {
-    'sqlite': f"sqlite:///{str(project_root_dir)}/{DATABASE_NAME}.db",
+    'sqlite': f"sqlite:///{str(project_root_dir)}/{DATABASE_NAME}.sqlite",
     'pg':  f"postgresql+psycopg2://{PG_USER}:{PG_PASS}@{PG_HOST}:{PG_PORT}/{DATABASE_NAME}"
 }
 
