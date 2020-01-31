@@ -1,5 +1,6 @@
 import logging
 
+
 DEFAULT_TABLE_X_SIZE = 30
 
 
@@ -16,8 +17,10 @@ class TGTable(object):
 
         :param dict data: Dictionary with data to build
         :param bool build_on_init: Creating table when table.__init__() *(optional)*
-        :param bool slim: Slim table columns CURRENTLY DEPRECATED *(optional)*
-
+        :param bool slim: Trims the size of the table columns to the minimum required size
+            CURRENTLY DEPRECATED
+            *(optional)*
+        :param aiogram.types.markdown md: automatically apply telegram markdownto the table
     """
 
     def __str__(self):
