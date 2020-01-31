@@ -1,4 +1,5 @@
 from aiogram import types
+from aiogram.dispatcher import FSMContext
 
 from src.app import bot, dp
 from src.text_content import TextMessage
@@ -8,7 +9,9 @@ from src.telegram.keyboards import keyboards
 
 
 @dp.message_handler(commands=['start'], state='*')
-async def start(message: types.Message):
+async def start(message: types.Message, state: FSMContext):
+    _current_user_state = await state.get_state()
+    await register(message.from_user) if message.text == '/start' and not _current_user_state else None
     await bot.s_send_message(TextMessage.start, reply_markup=keyboards['start'])
     await register(message.from_user)
     await UserState.start.set()
