@@ -1,7 +1,7 @@
 import logging
 import os
 import logging.handlers
-from config.system import project_root_dir
+from config.system import project_root_dir, PROJECT_NAME
 
 
 def logger_create(name):
@@ -13,7 +13,7 @@ def logger_create(name):
     logger = logging.getLogger(name)
     logger.setLevel(level)
     ch = logging.StreamHandler()
-    fh = logging.handlers.TimedRotatingFileHandler(filename=f"{str(project_root_dir)}/logs/{name}.log",
+    fh = logging.handlers.TimedRotatingFileHandler(filename=f"{str(project_root_dir)}/logs/{PROJECT_NAME}.log",
                                                    when='d')
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     ch.setFormatter(formatter)
